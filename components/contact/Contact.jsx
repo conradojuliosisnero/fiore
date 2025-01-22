@@ -38,7 +38,10 @@ const Contact = () => {
                 ></path>
               </g>
             </svg>
-            <span className="text-gray-800 ml-2"> 323 3330714</span>
+            <span className="text-gray-800 ml-2">
+              {" "}
+              323 3330714 / 301 6967412
+            </span>
           </div>
           <div className="flex items-center">
             <svg

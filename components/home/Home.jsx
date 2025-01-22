@@ -97,7 +97,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center">
               <Phone className="w-6 h-6 mb-4 text-gray-600" />
-              <p className="text-gray-600">323 3330714</p>
+              <p className="text-gray-600">323 3330714 / 301 6967412</p>
             </div>
             <div className="flex flex-col items-center">
               <Instagram className="w-6 h-6 mb-4 text-gray-600" />

@@ -2,7 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/commons/header/Header";
 import Footer from "@/components/commons/footer/Footer";
-import NavMobile from "@/components/commons/header/NavMobile";
+import ReduxLayout from "@/layouts/ReduxLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,10 +25,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        {/* <NavMobile /> */}
-        {children}
-        <Footer/>
+        {/* <ReduxLayout> */}
+          <Header />
+          {children}
+          <Footer />
+        {/* </ReduxLayout> */}
       </body>
     </html>
   );
