@@ -33,14 +33,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  if (loading) {
-    return <p>Cargando...</p>;
-  }
-
-  if (error) { 
-    return <p>Ha ocurrido un error: {error.message}</p>;
-  }
-
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -77,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <Featureds products={products} handlerclick={handlerclick} />
+      <Featureds products={products.slice(0,3)} handlerclick={handlerclick} />
 
       {/* Contact Section */}
       <ContactSection />
