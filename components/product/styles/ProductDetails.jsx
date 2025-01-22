@@ -27,7 +27,7 @@ Cantidad: ${quantity}
 Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
 
   const mensajeCodificado = encodeURIComponent(mensaje);
-  const numeroWhatsApp = "573005024089";
+  const numeroWhatsApp = "573233330714";
   const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensajeCodificado}`;
 
   return (

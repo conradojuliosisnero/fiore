@@ -11,12 +11,12 @@ const Footer = () => {
           &copy; 2025 Tu Empresa. Todos los derechos reservados.
         </p>
         <div className="mt-2">
-          <a href="#" className="text-white hover:text-slate-200 mx-2">
+          {/* <a href="#" className="text-white hover:text-slate-200 mx-2">
             Política de Privacidad
           </a>
           <a href="#" className="text-white hover:text-slate-200 mx-2">
             Términos del Servicio
-          </a>
+          </a> */}
           <Link href="/contact" className="text-white hover:text-slate-200 mx-2">
             Contáctanos
           </Link>

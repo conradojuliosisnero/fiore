@@ -1,19 +1,41 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
+
+  const handlerClick = () => {
+    router.push("/");
+  };
+
   return (
     <header className="bg-white shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4 ">
-        <Link href='/' className="text-2xl font-bold text-secondary">F I O R E</Link>
+        <Image
+          onClick={handlerClick}
+          className="cursor-pointer"
+          src="/images/FIORE-LOGO.png"
+          width={50}
+          alt="fiore-logo"
+          height={50}
+        ></Image>
+
         <nav className="hidden md:flex space-x-4">
           <Link href="/" className="text-gray-600 p-1 hover:text-gray-800">
             Inicio
           </Link>
-          <Link href="/shoping" className="text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary">
+          <Link
+            href="/shoping"
+            className="text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
+          >
             Tienda
           </Link>
-          <Link href="/contact" className="text-gray-600 p-1 hover:text-gray-800">
+          <Link
+            href="/contact"
+            className="text-gray-600 p-1 hover:text-gray-800"
+          >
             Contacto
           </Link>
         </nav>
