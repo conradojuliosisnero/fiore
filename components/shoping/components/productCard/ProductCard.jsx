@@ -22,7 +22,7 @@ const ProductCard = ({ product }) => {
             height={100}
             src={product?.image}
             loading="lazy"
-            quality={100}
+            quality={70}
             onClick={handlerClick}
           />
         </div>

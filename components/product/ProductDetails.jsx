@@ -45,10 +45,10 @@ export default function ProductDetail() {
     router.back();
   };
 
-  const mensaje = `Hola 👋, estoy interesado en comprar el producto ${product.name} que vi en su página web. 🛒
+  const mensaje = `Hola 👋, estoy interesado en comprar el producto ${product?.name} que vi en su página web. 🛒
 
 📦 Detalles adicionales:
-Producto: ${product.name}
+Producto: ${product?.name}
 Cantidad: ${quantity}
 Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
 
@@ -74,17 +74,17 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
           {/* Image */}
           <div className="relative aspect-square">
             <img
-              src={product.image}
-              alt={product.title}
+              src={product?.image}
+              alt={product?.title}
               className="w-full h-full object-cover rounded-lg"
             />
           </div>
 
           {/* Details */}
           <div className="flex flex-col">
-            <h1 className="text-3xl font-light mb-4">{product.name}</h1>
-            <p className="text-2xl mb-6">{product.price}.000 COP</p>
-            <p className="text-gray-600 mb-8">{product.description}</p>
+            <h1 className="text-3xl font-light mb-4">{product?.name}</h1>
+            <p className="text-2xl mb-6">{product?.price}.000 COP</p>
+            <p className="text-gray-600 mb-8">{product?.description}</p>
 
             {/* Quantity Selector */}
             <div className="flex items-center gap-4 mb-8">
