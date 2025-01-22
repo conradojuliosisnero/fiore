@@ -27,17 +27,7 @@ export async function getProductById(id) {
     };
     const URL = `${process.env.GET_PRODUCT}?id=${id}`;
     const response = await fetch(URL, OPTIONS);
-    //     id,
-    // section,
-    // name,
-    // price,
-    // image,
-    // description,
-    // discount,
-    // details,
-    // occasions,
     const data = await response.json();
-
     return data;
   } catch (error) {
     return error;
