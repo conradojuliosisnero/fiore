@@ -1,4 +1,7 @@
 export default function Featureds({ products, handlerclick }) {
+
+  console.log(products);
+
   return (
     <section id="productos" className="py-20 px-4 bg-gray-50">
       <div className="max-w-6xl mx-auto">
@@ -6,7 +9,7 @@ export default function Featureds({ products, handlerclick }) {
           Nuestras Creaciones
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {products?.slice(0, 3).map((product, index) => (
+          {products?.slice(0, 3)?.map((product, index) => (
             <div
               key={index}
               className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
