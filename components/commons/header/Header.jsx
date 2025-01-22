@@ -14,7 +14,7 @@ const Header = () => {
             Tienda
           </Link>
           <Link href="/contact" className="text-gray-600 p-1 hover:text-gray-800">
-            Contact
+            Contacto
           </Link>
         </nav>
         <div className="md:hidden">
