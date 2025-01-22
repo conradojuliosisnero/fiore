@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header className="bg-white shadow-md">
       <div className="container mx-auto flex justify-between items-center p-4 ">
-        <Link href='/' className="text-2xl font-bold text-secondary">Fiore</Link>
+        <Link href='/' className="text-2xl font-bold text-secondary">F I O R E</Link>
         <nav className="hidden md:flex space-x-4">
           <Link href="/" className="text-gray-600 p-1 hover:text-gray-800">
             Inicio

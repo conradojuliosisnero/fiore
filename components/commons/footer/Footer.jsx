@@ -5,6 +5,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer className="bg-secondary text-white py-4">
+      <div className="container mx-auto text-center text-2xl">F I O R E</div>
       <div className="container mx-auto text-center">
         <p className="text-sm">
           &copy; 2025 Tu Empresa. Todos los derechos reservados.
