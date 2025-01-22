@@ -1,24 +1,59 @@
 "use client";
 import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { productData } from "@/data/data";
 import { useParams } from "next/navigation";
 
 export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const router = useRouter();
   const { id } = useParams();
+
+  useEffect(() => {
+    const getProdut = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`/api/shopy/${id}`);
+        if (!response.ok) {
+          throw new Error("No se pudo obtener el producto");
+        }
+        const data = await response.json();
+        setProduct(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setProduct([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getProdut();
+  }, [id]);
+
+  useEffect(() => {
+    if (product && Array.isArray(product) && product.length > 0) {
+      setProduct(product[0]);
+    }
+  }, [product]);
 
   const handlerClick = () => {
     router.back();
   };
 
-  const product = productData.find((product) => product.id === Number(id));
-  
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
 
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  ////////////////////////
   const mensaje = `Hola 👋, estoy interesado en comprar el producto ${product.name} que vi en su página web. 🛒
 
 📦 Detalles adicionales:
@@ -97,7 +132,7 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
                 Detalles del producto
               </h2>
               <ul className="list-disc list-inside space-y-2 text-gray-600">
-                {product.details.map((detail, index) => (
+                {product?.details?.map((detail, index) => (
                   <li key={index}>{detail}</li>
                 ))}
               </ul>
@@ -107,7 +142,7 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
             <div className="border-t pt-8 mt-8">
               <h2 className="text-lg font-medium mb-4">Perfecto para</h2>
               <div className="flex flex-wrap gap-2">
-                {product.occasions.map((occasion, index) => (
+                {product?.occasions?.map((occasion, index) => (
                   <span
                     key={index}
                     className="bg-gray-100 px-4 py-2 rounded-full text-sm text-gray-600"
