@@ -1,7 +1,46 @@
-import { ArrowRight, Flower, Instagram, MapPin, Phone } from "lucide-react";
+"use client";
+import { ArrowRight, Flower} from "lucide-react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Featureds from "./components/feautered/Featureds";
+import ContactSection from "./components/contactSection/ContactSection";
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const router = useRouter();
+
+  const handlerclick = (id) => {
+    router.push(`/shoping/product/${id}`);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/api/home");
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <p>Cargando...</p>;
+  }
+
+  if (error) { 
+    return <p>Ha ocurrido un error: {error.message}</p>;
+  }
+
   return (
     <main className="min-h-screen">
       {/* Hero Section */}
@@ -38,74 +77,10 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <section id="productos" className="py-20 px-4 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl text-center mb-12 font-light">
-            Nuestras Creaciones
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Ramo Primaveral",
-                image:
-                  "https://images.unsplash.com/photo-1562690868-60bbe7293e94?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                price: "45€",
-              },
-              {
-                title: "Bouquet Romántico",
-                image:
-                  "https://images.unsplash.com/photo-1587314168485-3236d6710814?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                price: "55€",
-              },
-              {
-                title: "Arreglo Elegante",
-                image:
-                  "https://images.unsplash.com/photo-1561181286-d3fee7d55364?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-                price: "65€",
-              },
-            ].map((product, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-              >
-                <img
-                  src={product.image}
-                  alt={product.title}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-4">
-                  <h3 className="text-xl mb-2">{product.title}</h3>
-                  <p className="text-gray-600">{product.price}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Featureds products={products} handlerclick={handlerclick} />
 
       {/* Contact Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl text-center mb-12 font-light">Contactanos</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="flex flex-col items-center">
-              <MapPin className="w-6 h-6 mb-4 text-gray-600" />
-              <p className="text-gray-600">
-                <br />
-                Cartagena, Bolivar
-              </p>
-            </div>
-            <div className="flex flex-col items-center">
-              <Phone className="w-6 h-6 mb-4 text-gray-600" />
-              <p className="text-gray-600">323 3330714 / 301 6967412</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <Instagram className="w-6 h-6 mb-4 text-gray-600" />
-              <p className="text-gray-600">@detalles_fiore_</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactSection />
     </main>
   );
 }
