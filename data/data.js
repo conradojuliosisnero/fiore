@@ -94,7 +94,7 @@ export const products = [
     section: "RAMILLETES",
     name: "Product 11",
     price: 50.000,
-    image: "",
+    image: "/public/images/FIORE-11.png",
     description: "",
     discount: 75.000,
     }

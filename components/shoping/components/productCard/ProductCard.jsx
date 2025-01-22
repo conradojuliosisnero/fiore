@@ -1,6 +1,8 @@
 "use client";
 import "../../styles/product-card.css";
 import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ product }) => {
   const nombreProducto = "Producto Ejemplo";
@@ -17,14 +19,25 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
   const numeroWhatsApp = "573005024089";
   const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensajeCodificado}`;
 
+  const router = useRouter();
+  const handlerClick = () => {
+    router.push(`/shoping/product/${product.id}`);
+  };
+
   return (
-    <div className="bg-white rounded-lg shadow-md h-full transition-transform duration-200 hover:-translate-y-1">
+    <div
+      className="bg-white rounded-lg shadow-md h-full transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
+      onClick={handlerClick}
+    >
       <div className="flex flex-col h-full">
         <div className="relative w-full pt-[60%]">
-          <img
+          <Image
             className="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg"
-            src={product.image}
             alt={product.name}
+            width={100}
+            height={100}
+            src={product?.image}
+            loading="lazy"
           />
         </div>
         <div className="p-4 flex flex-col gap-2 flex-1">
@@ -49,7 +62,7 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
           </div>
           <Link
             href={enlaceWhatsApp}
-            _blank
+            _blank="true"
             className="bg-secondary text-white rounded-lg py-2 px-3 flex items-center justify-center gap-1 font-medium transition-colors hover:bg-primary hover:text-white"
           >
             <svg
