@@ -2,17 +2,24 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { motion } from "motion/react";
 
 const Header = () => {
   const router = useRouter();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handlerClick = () => {
     router.push("/");
   };
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <header className="bg-white shadow-md">
-      <div className="container mx-auto flex justify-between items-center p-4 ">
+      <div className="container mx-auto flex justify-between items-center p-4">
         <Image
           onClick={handlerClick}
           className="cursor-pointer"
@@ -20,7 +27,7 @@ const Header = () => {
           width={50}
           alt="fiore-logo"
           height={50}
-        ></Image>
+        />
 
         <nav className="hidden md:flex space-x-4">
           <Link href="/" className="text-gray-600 p-1 hover:text-gray-800">
@@ -40,7 +47,10 @@ const Header = () => {
           </Link>
         </nav>
         <div className="md:hidden">
-          <button className="text-gray-600 hover:text-gray-800 focus:outline-none">
+          <button
+            onClick={toggleMobileMenu}
+            className="text-gray-600 hover:text-gray-800 focus:outline-none"
+          >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -58,6 +68,27 @@ const Header = () => {
           </button>
         </div>
       </div>
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-white shadow-md">
+          <nav className="flex flex-col space-y-2 p-4">
+            <Link href="/" className="text-gray-600 p-1 hover:text-gray-800">
+              Inicio
+            </Link>
+            <Link
+              href="/shoping"
+              className="text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
+            >
+              Tienda
+            </Link>
+            <Link
+              href="/contact"
+              className="text-gray-600 p-1 hover:text-gray-800"
+            >
+              Contacto
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 };
