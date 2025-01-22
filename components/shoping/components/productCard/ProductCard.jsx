@@ -5,19 +5,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 const ProductCard = ({ product }) => {
-  const nombreProducto = "Producto Ejemplo";
-  const cantidadDeseada = 1;
-
-  const mensaje = `Hola 👋, estoy interesado en comprar el producto ${nombreProducto} que vi en su página web. 🛒
-
-📦 Detalles adicionales:
-Producto: ${nombreProducto}
-Cantidad: ${cantidadDeseada}
-Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
-
-  const mensajeCodificado = encodeURIComponent(mensaje);
-  const numeroWhatsApp = "573005024089";
-  const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensajeCodificado}`;
 
   const router = useRouter();
   const handlerClick = () => {
@@ -25,10 +12,7 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
   };
 
   return (
-    <div
-      className="bg-white rounded-lg shadow-md h-full transition-transform duration-200 hover:-translate-y-1 cursor-pointer"
-      onClick={handlerClick}
-    >
+    <div className="bg-white rounded-lg shadow-md h-full transition-transform duration-200 hover:-translate-y-1 cursor-pointer">
       <div className="flex flex-col h-full">
         <div className="relative w-full pt-[60%]">
           <Image
@@ -38,6 +22,8 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
             height={100}
             src={product?.image}
             loading="lazy"
+            quality={100}
+            onClick={handlerClick}
           />
         </div>
         <div className="p-4 flex flex-col gap-2 flex-1">
@@ -61,7 +47,7 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
             </span>
           </div>
           <Link
-            href={enlaceWhatsApp}
+            href={`/shoping/product/${product.id}`}
             _blank="true"
             className="bg-secondary text-white rounded-lg py-2 px-3 flex items-center justify-center gap-1 font-medium transition-colors hover:bg-primary hover:text-white"
           >

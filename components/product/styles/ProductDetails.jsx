@@ -1,34 +1,34 @@
 "use client";
-import { ArrowLeft, Heart, Minus, Plus, ShoppingCart } from "lucide-react";
+import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { productData } from "@/data/data";
+import { useParams } from "next/navigation";
 
 export default function ProductDetail() {
-    const [quantity, setQuantity] = useState(1);
-    
-    const router = useRouter();
+  const [quantity, setQuantity] = useState(1);
 
-    const handlerClick = () => { 
-        router.back();
-    }
+  const router = useRouter();
+  const { id } = useParams();
 
-  const product = {
-    title: "Ramo Primaveral",
-    price: 45,
-    image:
-      "https://images.unsplash.com/photo-1562690868-60bbe7293e94?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
-    description:
-      "Un vibrante arreglo que celebra la frescura de la primavera con una selección de flores de temporada en tonos pastel.",
-    details: [
-      "Rosas rosadas",
-      "Margaritas blancas",
-      "Claveles multicolor",
-      "Follaje decorativo",
-      "Altura aproximada: 40cm",
-    ],
-    occasions: ["Cumpleaños", "Celebraciones", "Regalo"],
+  const handlerClick = () => {
+    router.back();
   };
+
+  const product = productData.find((product) => product.id === Number(id));
+  
+
+  const mensaje = `Hola 👋, estoy interesado en comprar el producto ${product.name} que vi en su página web. 🛒
+
+📦 Detalles adicionales:
+Producto: ${product.name}
+Cantidad: ${quantity}
+Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
+
+  const mensajeCodificado = encodeURIComponent(mensaje);
+  const numeroWhatsApp = "573005024089";
+  const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensajeCodificado}`;
 
   return (
     <main className="min-h-screen bg-white">
@@ -56,7 +56,7 @@ export default function ProductDetail() {
 
           {/* Details */}
           <div className="flex flex-col">
-            <h1 className="text-3xl font-light mb-4">{product.title}</h1>
+            <h1 className="text-3xl font-light mb-4">{product.name}</h1>
             <p className="text-2xl mb-6">{product.price}.000 COP</p>
             <p className="text-gray-600 mb-8">{product.description}</p>
 
@@ -82,10 +82,13 @@ export default function ProductDetail() {
 
             {/* Actions */}
             <div className="flex gap-4 mb-8">
-              <button className="flex-1 bg-secondary text-white px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-primary transition-colors">
+              <Link
+                href={enlaceWhatsApp}
+                className="flex-1 bg-secondary text-white px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-primary transition-colors"
+              >
                 <ShoppingCart className="w-5 h-5" />
-                Añadir al carrito
-              </button>
+                Comprar
+              </Link>
             </div>
 
             {/* Details List */}
