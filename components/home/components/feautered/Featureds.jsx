@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Featureds({ products, handlerclick }) {
 
   return (
@@ -13,10 +15,14 @@ export default function Featureds({ products, handlerclick }) {
               className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer"
               onClick={() => handlerclick(product.id)}
             >
-              <img
+              <Image
+                className="w-full h-64 object-cover"
+                width={100}
+                height={100}
+                loading="lazy"
+                quality={90}
                 src={product.image}
                 alt={product.title}
-                className="w-full h-64 object-cover"
               />
               <div className="p-4">
                 <h3 className="text-xl mb-2">{product.title}</h3>
