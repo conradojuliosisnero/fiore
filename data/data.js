@@ -1,0 +1,38 @@
+export const products = [
+  {
+    id: 1,
+    section: "RAMILLETES",
+    name: "Product 1",
+    price: "50.000",
+    image: "",
+    description: "",
+    discount: "75.000",
+  },
+  {
+    id: 2,
+    section: "RAMILLETES",
+    name: "Product 2",
+    price: "50.000",
+    image: "",
+    description: "",
+    discount: "75.000",
+  },
+  {
+    id: 3,
+    section: "RAMILLETES",
+    name: "Product 3",
+    price: "50.000",
+    image: "",
+    description: "",
+    discount: "75.000",
+  },
+  {
+    id: 4,
+    section: "RAMILLETES",
+    name: "Product 4",
+    price: "50.000",
+    image: "",
+    description: "",
+    discount: "75.000",
+  },
+];
