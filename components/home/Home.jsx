@@ -21,6 +21,7 @@ export default function Home() {
             <h1 className="text-4xl md:text-6xl font-light tracking-wider">
               FIORE
             </h1>
+            <Flower className="w-8 h-8" />
           </div>
           <p className="text-lg md:text-xl text-center max-w-xl mb-8 text-gray-100">
             Donde cada flor cuenta una historia única y cada arreglo es una obra
@@ -90,7 +91,6 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <MapPin className="w-6 h-6 mb-4 text-gray-600" />
               <p className="text-gray-600">
-                
                 <br />
                 Cartagena, Bolivar
               </p>
@@ -101,7 +101,7 @@ export default function Home() {
             </div>
             <div className="flex flex-col items-center">
               <Instagram className="w-6 h-6 mb-4 text-gray-600" />
-              <p className="text-gray-600">@fiore.flores</p>
+              <p className="text-gray-600">@detalles_fiore_</p>
             </div>
           </div>
         </div>

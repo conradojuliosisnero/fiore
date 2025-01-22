@@ -149,7 +149,7 @@ const Contact = () => {
                 </defs>{" "}
               </g>
             </svg>
-            <span className="text-gray-800 ml-2"> @fiore</span>
+            <span className="text-gray-800 ml-2"> @detalles_fiore_</span>
           </div>
           <div className="flex items-center">
             <svg
