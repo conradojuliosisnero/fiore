@@ -7,7 +7,7 @@ import Featureds from "./components/feautered/Featureds";
 import ContactSection from "./components/contactSection/ContactSection";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,7 +22,7 @@ export default function Home() {
       try {
         const response = await fetch("/api/home");
         const data = await response.json();
-        setProducts(data);
+        setData(data);
       } catch (error) {
         setError(error);
       } finally {
@@ -32,6 +32,7 @@ export default function Home() {
 
     fetchData();
   }, []);
+
 
   return (
     <main className="min-h-screen">
@@ -69,7 +70,7 @@ export default function Home() {
       </section>
 
       {/* Featured Products */}
-      <Featureds products={products.slice(0,3)} handlerclick={handlerclick} />
+      <Featureds products={data} handlerclick={handlerclick} />
 
       {/* Contact Section */}
       <ContactSection />

@@ -45,15 +45,6 @@ export default function ProductDetail() {
     router.back();
   };
 
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  ////////////////////////
   const mensaje = `Hola 👋, estoy interesado en comprar el producto ${product.name} que vi en su página web. 🛒
 
 📦 Detalles adicionales:
