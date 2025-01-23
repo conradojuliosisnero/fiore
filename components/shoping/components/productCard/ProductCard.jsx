@@ -55,7 +55,7 @@ const ProductCard = ({ product }) => {
               _blank="true"
               className=" w-full bg-secondary text-white mr-2 rounded-lg py-2 px-3 flex items-center justify-center gap-1 font-medium transition-colors hover:bg-primary hover:text-white"
             >
-              <span>Comprar</span>
+              <span>Ver Detalles</span>
             </Link>
             {/* <ButtonCart id={product.id}/> */}
           </div>
