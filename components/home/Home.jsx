@@ -1,12 +1,16 @@
 "use client";
-import { ArrowRight, Flower} from "lucide-react";
+import { ArrowRight, Flower } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Featureds from "./components/feautered/Featureds";
-import ContactSection from "./components/contactSection/ContactSection";
 import HomePageSkeleton from "./components/SkeltonHome/SkeletonHome";
 import ErrorHome from "./components/ErrorHome/Error";
+import dynamic from "next/dynamic";
+
+const Featureds = dynamic(() => import("./components/feautered/Featureds"));
+const ContactSection = dynamic(() =>
+  import("./components/contactSection/ContactSection")
+);
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -35,7 +39,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-    const handlerReload = () => {
+  const handlerReload = () => {
     window.location.reload();
   };
 
@@ -43,10 +47,9 @@ export default function Home() {
     return <HomePageSkeleton />;
   }
 
-  if (error) { 
+  if (error) {
     return <ErrorHome error={error} reset={handlerReload} />;
   }
-
 
   return (
     <main className="min-h-screen">

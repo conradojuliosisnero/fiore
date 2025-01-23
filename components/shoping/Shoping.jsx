@@ -1,8 +1,10 @@
 "use client";
-import ErrorShoping from "./components/error/ErrorShoping";
-import ProductCard from "./components/productCard/ProductCard";
-import LoadingSkeleton from "./components/Skelton/Loading";
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
+
+const ProductCard = dynamic(() => import("./components/productCard/ProductCard"));
+const LoadingSkeleton = dynamic(() => import("./components/Skelton/Loading"));
+const ErrorShoping = dynamic(() => import("./components/error/ErrorShoping"));
 
 const Shoping = () => {
   const [products, setProducts] = useState([]);
