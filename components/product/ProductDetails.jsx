@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
+import ProductDetailSkeleton from "./components/SkeltonDetail";
+import Error from "./components/ErrorDetails";
 
 export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
@@ -41,9 +43,22 @@ export default function ProductDetail() {
     }
   }, [product]);
 
+  const handlerReload = () => {
+    window.location.reload();
+  };
+
   const handlerClick = () => {
     router.back();
   };
+
+  if (loading) {
+    return <ProductDetailSkeleton />;
+  }
+
+  if (error) { 
+    return <Error error={error} reset={handlerReload}/>
+  }
+
 
   const mensaje = `Hola 👋, estoy interesado en comprar el producto ${product?.name} que vi en su página web. 🛒
 

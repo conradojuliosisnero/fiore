@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Featureds from "./components/feautered/Featureds";
 import ContactSection from "./components/contactSection/ContactSection";
+import HomePageSkeleton from "./components/SkeltonHome/SkeletonHome";
+import ErrorHome from "./components/ErrorHome/Error";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -32,6 +34,18 @@ export default function Home() {
 
     fetchData();
   }, []);
+
+    const handlerReload = () => {
+    window.location.reload();
+  };
+
+  if (loading) {
+    return <HomePageSkeleton />;
+  }
+
+  if (error) { 
+    return <ErrorHome error={error} reset={handlerReload} />;
+  }
 
 
   return (
