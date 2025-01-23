@@ -12,7 +12,7 @@ const Footer = () => {
       </div>
       <div className="container mx-auto text-center">
         <p className="text-sm">
-          &copy; 2025 Tu Empresa. Todos los derechos reservados.
+          &copy; 2025 Fiore. Todos los derechos reservados.
         </p>
         <div className="mt-2">
           {/* <a href="#" className="text-white hover:text-slate-200 mx-2">
