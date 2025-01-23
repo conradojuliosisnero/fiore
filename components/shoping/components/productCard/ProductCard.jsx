@@ -3,6 +3,7 @@ import "../../styles/product-card.css";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import HotSale from "@/components/commons/hot-sale/HotSale";
 
 const ProductCard = ({ product }) => {
 
@@ -14,6 +15,7 @@ const ProductCard = ({ product }) => {
   return (
     <div className="bg-white rounded-lg shadow-md h-full transition-transform duration-200 hover:-translate-y-1 cursor-pointer">
       <div className="flex flex-col h-full">
+        {product?.hot_sale && <HotSale />}
         <div className="relative w-full pt-[60%] overflow-hidden">
           <Image
             className="absolute top-0 left-0 w-full h-full object-cover rounded-t-lg"
@@ -39,7 +41,7 @@ const ProductCard = ({ product }) => {
             </p>
           </div>
           <div className="flex items-center gap-2 my-2">
-            <span className="text-xl font-bold text-secondary">
+            <span className="text-xl font-bold text-tertiary">
               {product.price}.000
             </span>
             <span className="text-xs text-gray-500 line-through">

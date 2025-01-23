@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Montserrat:wght@500;700&display=swap");
+
+.main {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  transition: transform 0.2s;
+}
+
+.main:hover {
+  transform: translateY(-5px);
+}
+
+.card__container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card__img {
+  position: relative;
+  width: 100%;
+  padding-top: 75%; /* Aspect ratio 4:3 */
+}
+
+.card__img .img1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.card__contend {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.card__text .leyend {
+  color: #6B7280;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.card__text .tittle {
+  font-family: "Fraunces", serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 0.5rem;
+}
+
+.card__text .text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.875rem;
+  color: #6B7280;
+  line-height: 1.5;
+}
+
+.card__price {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.card__price-one {
+  color: #047857;
+  font-family: "Fraunces", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.card__price-tho {
+  color: #6B7280;
+  text-decoration: line-through;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.875rem;
+}
+
+.card__btn {
+  background-color: #047857;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.card__btn:hover {
+  background-color: #065F46;
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    max-width: 100%;
+  }
+  
+  .card__img {
+    padding-top: 100%; /* Aspect ratio 1:1 en móvil */
+  }
+  
+  .card__contend {
+    padding: 1rem;
+  }
+  
+  .card__text .tittle {
+    font-size: 1.125rem;
+  }
+  
+  .card__price-one {
+    font-size: 1.25rem;
+  }
+}
