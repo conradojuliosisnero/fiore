@@ -1,5 +1,7 @@
 "use client";
+import ErrorShoping from "./components/error/ErrorShoping";
 import ProductCard from "./components/productCard/ProductCard";
+import LoadingSkeleton from "./components/Skelton/Loading";
 import { useState, useEffect } from "react";
 
 const Shoping = () => {
@@ -26,6 +28,18 @@ const Shoping = () => {
     };
     fetchProducts();
   }, []);
+
+  const handlerReset = () => { 
+    window.location.reload();
+  }
+
+  if (loading) {
+    return <LoadingSkeleton />;
+  }
+
+  if (error) {
+    return <ErrorShoping error={error} reset={handlerReset} />;
+  }
 
   return (
     <div className="container mx-auto p-4">
