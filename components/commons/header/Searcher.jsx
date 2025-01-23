@@ -25,14 +25,14 @@ const Searcher = () => {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex items-center justify-center p-4"
+      className=" flex items-center justify-center p-4"
     >
       <input
         type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="clavel, tulipan,margarita..."
-        className="border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary"
+        className="container flex border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-secondary"
       />
       <button
         onClick={handleSearch}
