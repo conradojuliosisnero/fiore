@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const ProductDetailSkeleton = dynamic(() => import("./components/SkeltonDetail"));
 const Error = dynamic(() => import("./components/ErrorDetails"));
@@ -89,7 +90,11 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {/* Image */}
           <div className="relative aspect-square">
-            <img
+            <Image
+              width={100}
+              height={100}
+              quality={90}
+              loading="lazy"
               src={product?.image}
               alt={product?.title}
               className="w-full h-full object-cover rounded-lg"

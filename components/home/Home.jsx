@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import HomePageSkeleton from "./components/SkeltonHome/SkeletonHome";
 import ErrorHome from "./components/ErrorHome/Error";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 
 const Featureds = dynamic(() => import("./components/feautered/Featureds"));
 const ContactSection = dynamic(() =>
@@ -56,7 +57,11 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen">
         <div className="absolute inset-0">
-          <img
+          <Image
+            width={100}
+            height={100}
+            quality={100}
+            loading="lazy"
             src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
             alt="Flores hermosas"
             className="w-full h-full object-cover"
