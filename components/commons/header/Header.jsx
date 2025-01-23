@@ -67,7 +67,7 @@ const Header = () => {
           >
             <ShoppingBag className="w-5 h-5 text-white hover:text-secondary" />
           </Link>
-          <Link
+          {/* <Link
             href="/cart"
             className="relative text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
           >
@@ -75,7 +75,7 @@ const Header = () => {
             <span className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center rounded-full bg-tertiary text-white text-xs">
               {0}
             </span>
-          </Link>
+          </Link> */}
           <Link
             href="/contact"
             className="text-gray-600 p-1 hover:text-gray-800"
@@ -133,7 +133,7 @@ const Header = () => {
               >
                 <ShoppingBag className="w-5 h-5 text-white hover:text-secondary" />
               </Link>
-              <Link
+              {/* <Link
                 href="/cart"
                 className="relative text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
               >
@@ -141,7 +141,7 @@ const Header = () => {
                 <span className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center rounded-full bg-tertiary text-white text-xs">
                   {0}
                 </span>
-              </Link>
+              </Link> */}
               <Link
                 href="/contact"
                 className="text-gray-600 p-1 hover:text-gray-800"
