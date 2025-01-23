@@ -115,9 +115,9 @@ const Header = () => {
             className="md:hidden bg-white shadow-md"
           >
             <nav className="flex flex-col space-y-2 p-4">
-              <div>
+              {/* <div> */}
                 <Searcher />
-              </div>
+              {/* </div> */}
               <Link
                 href="/search"
                 className="text-gray-600 p-1 hover:text-gray-800"
