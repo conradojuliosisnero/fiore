@@ -24,9 +24,9 @@ export default function Featureds({ products, handlerclick }) {
                 src={product.image}
                 alt={product.title}
               />
-              <div className="p-4">
+              <div className="p-4 container flex justify-center">
                 <h3 className="text-xl mb-2">{product.title}</h3>
-                <p className="text-gray-600">{product.price}.000</p>
+                <p className="text-gray-600 font-bold">{product.price}.000</p>
               </div>
             </div>
           ))}
