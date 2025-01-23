@@ -2,13 +2,25 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Searcher from "./Searcher";
-import { Search } from "lucide-react";
+import {
+  Home,
+  PhoneIcon,
+  Search,
+  ShoppingBag,
+  ShoppingCart,
+} from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Header = () => {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const handlerClick = () => {
     router.push("/");
@@ -16,6 +28,12 @@ const Header = () => {
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const animations = {
+    initial: { opacity: 1, transform: "translateY(-100%)" },
+    animate: { opacity: 1, transform: "translateY(0%)" },
+    exit: { opacity: 1, transform: "translateY(-100%)" },
   };
 
   return (
@@ -41,19 +59,28 @@ const Header = () => {
             <Search className="w-5 h-5 text-gray-600 hover:text-gray-800" />
           </Link>
           <Link href="/" className="text-gray-600 p-1 hover:text-gray-800">
-            Inicio
+            <Home className="w-5 h-5 text-gray-600 hover:text-gray-800" />
           </Link>
           <Link
             href="/shoping"
             className="text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
           >
-            Tienda
+            <ShoppingBag className="w-5 h-5 text-white hover:text-secondary" />
+          </Link>
+          <Link
+            href="/cart"
+            className="relative text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
+          >
+            <ShoppingCart className="w-5 h-5 text-white hover:text-secondary" />
+            <span className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center rounded-full bg-tertiary text-white text-xs">
+              {0}
+            </span>
           </Link>
           <Link
             href="/contact"
             className="text-gray-600 p-1 hover:text-gray-800"
           >
-            Contacto
+            <PhoneIcon className="w-5 h-5 text-gray-600 hover:text-gray-800" />
           </Link>
         </nav>
         <div className="md:hidden">
@@ -79,28 +106,51 @@ const Header = () => {
         </div>
       </div>
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-white shadow-md">
-          <nav className="flex flex-col space-y-2 p-4">
-            <div>
-              <Searcher />
-            </div>
-            <Link href="/" className="text-gray-600 p-1 hover:text-gray-800">
-              Inicio
-            </Link>
-            <Link
-              href="/shoping"
-              className="text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
-            >
-              Tienda
-            </Link>
-            <Link
-              href="/contact"
-              className="text-gray-600 p-1 hover:text-gray-800"
-            >
-              Contacto
-            </Link>
-          </nav>
-        </div>
+        <AnimatePresence>
+          <motion.div
+            variants={animations}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="md:hidden bg-white shadow-md"
+          >
+            <nav className="flex flex-col space-y-2 p-4">
+              <div>
+                <Searcher />
+              </div>
+              <Link
+                href="/search"
+                className="text-gray-600 p-1 hover:text-gray-800"
+              >
+                <Search className="w-5 h-5 text-gray-600 hover:text-gray-800" />
+              </Link>
+              <Link href="/" className="text-gray-600 p-1 hover:text-gray-800">
+                <Home className="w-5 h-5 text-gray-600 hover:text-gray-800" />
+              </Link>
+              <Link
+                href="/shoping"
+                className="text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
+              >
+                <ShoppingBag className="w-5 h-5 text-white hover:text-secondary" />
+              </Link>
+              <Link
+                href="/cart"
+                className="relative text-white bg-secondary p-1 rounded-md hover:bg-white hover:text-secondary hover:border-secondary border-2 border-secondary"
+              >
+                <ShoppingCart className="w-5 h-5 text-white hover:text-secondary" />
+                <span className="absolute -top-3 -right-3 w-5 h-5 flex items-center justify-center rounded-full bg-tertiary text-white text-xs">
+                  {0}
+                </span>
+              </Link>
+              <Link
+                href="/contact"
+                className="text-gray-600 p-1 hover:text-gray-800"
+              >
+                <PhoneIcon className="w-5 h-5 text-gray-600 hover:text-gray-800" />
+              </Link>
+            </nav>
+          </motion.div>
+        </AnimatePresence>
       )}
     </header>
   );
