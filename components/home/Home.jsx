@@ -58,9 +58,9 @@ export default function Home() {
       <section className="relative h-screen">
         <div className="absolute inset-0">
           <Image
-            width={100}
-            height={100}
-            quality={100}
+            width={600}
+            height={600}
+            quality={70}
             loading="lazy"
             src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80"
             alt="Flores hermosas"
