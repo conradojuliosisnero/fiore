@@ -57,7 +57,7 @@ const ProductCard = ({ product }) => {
             >
               <span>Comprar</span>
             </Link>
-            <ButtonCart id={product.id}/>
+            {/* <ButtonCart id={product.id}/> */}
           </div>
         </div>
       </div>
