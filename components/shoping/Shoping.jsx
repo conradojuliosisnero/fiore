@@ -1,13 +1,22 @@
 "use client";
-import ErrorShoping from "./components/error/ErrorShoping";
-import ProductCard from "./components/productCard/ProductCard";
-import LoadingSkeleton from "./components/Skelton/Loading";
+import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { counterProducts } from "@/slices/storeSlice";
+
+const ProductCard = dynamic(() =>
+  import("./components/productCard/ProductCard")
+);
+const LoadingSkeleton = dynamic(() => import("./components/Skelton/Loading"));
+const ErrorShoping = dynamic(() => import("./components/error/ErrorShoping"));
 
 const Shoping = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const dispatch = useDispatch();
+  const counter = useSelector((state) => state.counterStore.counterProducts);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -18,6 +27,7 @@ const Shoping = () => {
         }
         const products = await response.json();
         setProducts(products);
+        dispatch(counterProducts(products.length));
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -29,9 +39,9 @@ const Shoping = () => {
     fetchProducts();
   }, []);
 
-  const handlerReset = () => { 
+  const handlerReset = () => {
     window.location.reload();
-  }
+  };
 
   if (loading) {
     return <LoadingSkeleton />;
@@ -43,6 +53,10 @@ const Shoping = () => {
 
   return (
     <div className="container mx-auto p-4">
+      <p className="text-gray-500">
+        Estas viendo <strong>{counter}</strong> productos disponibles en la
+        tienda.
+      </p>
       <div className="grid grid-cols-1 mt-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {Array.isArray(products) &&
           products?.map((product) => (

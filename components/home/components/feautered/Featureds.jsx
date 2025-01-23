@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 
 export default function Featureds({ products, handlerclick }) {
@@ -20,13 +21,13 @@ export default function Featureds({ products, handlerclick }) {
                 width={100}
                 height={100}
                 loading="lazy"
-                quality={90}
+                quality={70}
                 src={product.image}
                 alt={product.title}
               />
               <div className="p-4 container flex justify-center">
                 <h3 className="text-xl mb-2">{product.title}</h3>
-                <p className="text-gray-600 font-bold">{product.price}.000</p>
+                <p className="text-tertiary font-bold">{product.price}.000</p>
               </div>
             </div>
           ))}

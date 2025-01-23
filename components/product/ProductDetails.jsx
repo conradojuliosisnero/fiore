@@ -2,10 +2,11 @@
 import { ArrowLeft, Minus, Plus, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
-import ProductDetailSkeleton from "./components/SkeltonDetail";
-import Error from "./components/ErrorDetails";
+import { useRouter, useParams } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const ProductDetailSkeleton = dynamic(() => import("./components/SkeltonDetail"));
+const Error = dynamic(() => import("./components/ErrorDetails"));
 
 export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
@@ -72,16 +73,16 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
   const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensajeCodificado}`;
 
   return (
-    <main className="min-h-screen bg-white">
+    <section className="min-h-screen bg-white">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
+      <div className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
             <ArrowLeft className="w-5 h-5" />
             <span onClick={handlerClick}>Volver</span>
           </button>
         </div>
-      </nav>
+      </div>
 
       {/* Product Details */}
       <div className="max-w-6xl mx-auto px-4 py-8">
@@ -98,7 +99,7 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
           {/* Details */}
           <div className="flex flex-col">
             <h1 className="text-3xl font-light mb-4">{product?.name}</h1>
-            <p className="text-2xl mb-6">{product?.price}.000 COP</p>
+            <p className="text-2xl mb-6 font-bold">{product?.price}.000 COP</p>
             <p className="text-gray-600 mb-8">{product?.description}</p>
 
             {/* Quantity Selector */}
@@ -161,6 +162,6 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
           </div>
         </div>
       </div>
-    </main>
+    </section>
   );
 }
