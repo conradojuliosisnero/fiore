@@ -8,10 +8,7 @@ export default function ContactSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div className="flex flex-col items-center">
             <MapPin className="w-6 h-6 mb-4 text-gray-600" />
-            <p className="text-gray-600">
-              <br />
-              Cartagena, Bolivar
-            </p>
+            <p className="text-gray-600">Cartagena, Bolivar</p>
           </div>
           <div className="flex flex-col items-center">
             <Phone className="w-6 h-6 mb-4 text-gray-600" />
