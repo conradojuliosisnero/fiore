@@ -6,6 +6,12 @@ import { useRouter, useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { WhatsappSvg } from "@/assets/WhatsappSvg";
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  WhatsappIcon,
+} from "react-share";
 
 const ProductDetailSkeleton = dynamic(() =>
   import("./components/SkeltonDetail")
@@ -75,6 +81,9 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
   const numeroWhatsApp = "573233330714";
   const enlaceWhatsApp = `https://api.whatsapp.com/send?phone=${numeroWhatsApp}&text=${mensajeCodificado}`;
 
+  const shareUrl = window.location.href;
+  const shareTitle = `🌟 Mira este increíble producto: ${product?.name} 🌟`;
+
   return (
     <section className="min-h-screen bg-white">
       {/* Navigation */}
@@ -138,6 +147,29 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
                 <ShoppingCart className="w-5 h-5" />
                 Preguntar en <WhatsappSvg className="w-10 h-10" />
               </Link>
+            </div>
+
+            {/* Share Buttons */}
+            <div className="flex flex-col gap-4 mb-8 w-full">
+              <div className="flex items-center gap-4">
+                <span className="font-bold text-xl">Compartir en</span>
+              </div>
+              <div className="flex gap-1">
+              <FacebookShareButton
+                url={shareUrl}
+                quote={shareTitle}
+                className="ml-2"
+              >
+                <FacebookIcon size={40} round />
+              </FacebookShareButton>
+              <WhatsappShareButton
+                url={shareUrl}
+                title={shareTitle}
+                className="ml-2"
+              >
+                <WhatsappIcon size={40} round />
+              </WhatsappShareButton>
+              </div>
             </div>
 
             {/* Details List */}
