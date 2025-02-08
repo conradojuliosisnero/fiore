@@ -5,8 +5,11 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { WhatsappSvg } from "@/assets/WhatsappSvg";
 
-const ProductDetailSkeleton = dynamic(() => import("./components/SkeltonDetail"));
+const ProductDetailSkeleton = dynamic(() =>
+  import("./components/SkeltonDetail")
+);
 const Error = dynamic(() => import("./components/ErrorDetails"));
 
 export default function ProductDetail() {
@@ -57,10 +60,9 @@ export default function ProductDetail() {
     return <ProductDetailSkeleton />;
   }
 
-  if (error) { 
-    return <Error error={error} reset={handlerReload}/>
+  if (error) {
+    return <Error error={error} reset={handlerReload} />;
   }
-
 
   const mensaje = `Hola 👋, estoy interesado en comprar el producto ${product?.name} que vi en su página web. 🛒
 
@@ -131,10 +133,10 @@ Por favor, indíquenme cómo puedo proceder con la compra. ¡Gracias! 😊`;
             <div className="flex gap-4 mb-8">
               <Link
                 href={enlaceWhatsApp}
-                className="flex-1 bg-secondary text-white px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-primary transition-colors"
+                className="flex-1 bg-green-600 font-bold text-white px-8 py-3 rounded-full flex items-center justify-center gap-2 hover:bg-green-700 transition-colors"
               >
                 <ShoppingCart className="w-5 h-5" />
-                Comprar
+                Preguntar en <WhatsappSvg className="w-10 h-10" />
               </Link>
             </div>
 

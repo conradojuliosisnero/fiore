@@ -3,7 +3,7 @@ import { getProductById } from "@/services/shopy/index";
 
 export async function GET(req, { params }) {
   try {
-    const { id } = params;
+    const { id } = await params;
     const response = await getProductById(id);
     return NextResponse.json(response, {
       status: 200,
