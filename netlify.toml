@@ -20,3 +20,13 @@
   from = "/contact"
   to = "/#contacto"
   status = 301
+
+[[redirects]]
+  from = "/cart"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/shoping/product/*"
+  to = "/#catalogo"
+  status = 301
