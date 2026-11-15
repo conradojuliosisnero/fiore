@@ -190,7 +190,7 @@ const steps = [
       $('[data-m-media]').innerHTML = sel.image ? `<img src="${esc(sel.image)}" alt="${esc(sel.name)}" style="width:100%;height:100%;object-fit:cover">` : '';
       $('[data-m-details]').innerHTML = sel.details.map((d) => `<li>${esc(d)}</li>`).join('');
       $('[data-m-occ]').innerHTML = sel.occasions.map((o) => `<span class="chip" style="cursor:default">${esc(o)}</span>`).join('');
-      setQty(1); open($('[data-modal]'));
+      $('[data-toast]').hidden = true; setQty(1); open($('[data-modal]'));
     }
 
     document.addEventListener('click', (e) => {

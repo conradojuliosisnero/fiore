@@ -34,7 +34,7 @@ button{font-family:inherit;color:inherit}
 .icon-btn{border:none;background:oklch(0.92 0.01 70);width:36px;height:36px;border-radius:999px;cursor:pointer;font-size:16px;flex-shrink:0;transition:transform .3s var(--ease),background .2s}
 .icon-btn:hover{transform:rotate(90deg);background:oklch(0.88 0.015 70)}
 
-.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;align-items:center;padding-top:48px;padding-bottom:32px}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:40px;align-items:center;padding-top:48px;padding-bottom:32px}
 .hero-copy{display:flex;flex-direction:column;gap:24px;animation:rise .8s var(--ease) both}
 .kicker{font-size:13px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:oklch(0.45 0.1 25)}
 .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(48px,7vw,88px);line-height:.95;margin:0;letter-spacing:-1.5px;text-wrap:balance}
@@ -87,7 +87,7 @@ h2.serif{font-size:48px;margin:0;letter-spacing:-.8px;line-height:1}
 .backdrop[hidden]{display:none}
 .backdrop.closing{animation:fadeOut .22s both}
 .modal-wrap{align-items:center;justify-content:center;padding:16px}
-.modal{background:var(--surface);border-radius:24px;max-width:900px;width:100%;max-height:92vh;overflow:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));animation:popIn .4s var(--ease) both}
+.modal{background:var(--surface);border-radius:24px;max-width:900px;width:100%;max-height:92vh;max-height:92dvh;overflow:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));animation:popIn .4s var(--ease) both}
 .closing .modal{animation:popOut .22s both}
 .modal-media{min-height:320px}
 .modal-body{padding:28px;display:flex;flex-direction:column;gap:20px}
@@ -118,7 +118,7 @@ textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px oklch(0.58 0.12 2
 .drawer-foot{padding:20px 24px;border-top:1px solid oklch(0.9 0.012 70);display:flex;flex-direction:column;gap:12px}
 .total{display:flex;justify-content:space-between;font-weight:700;font-size:17px}
 
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;z-index:60;display:flex;gap:14px;align-items:center;animation:toastUp .4s var(--ease) both}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:999px;font-size:14px;z-index:60;width:max-content;max-width:calc(100% - 32px);display:flex;gap:14px;align-items:center;animation:toastUp .4s var(--ease) both}
 .toast[hidden]{display:none}
 .toast button{background:none;border:none;color:oklch(0.82 0.08 25);font-weight:600;cursor:pointer;font-size:14px}
 
@@ -132,4 +132,12 @@ textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px oklch(0.58 0.12 2
 @keyframes toastUp{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
 @keyframes itemIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
-@media (max-width:640px){.nav{display:none}h2.serif{font-size:38px}}
+@media (max-width:640px){
+  .header .wrap{flex-wrap:wrap;gap:12px 20px;padding-top:12px;padding-bottom:10px}
+  .nav{order:3;flex-basis:100%;gap:18px}
+  .pill{margin-left:auto}
+  h2.serif{font-size:38px}
+  .modal-media{min-height:0;height:min(40dvh,300px)}
+  [data-m-add]{position:sticky;bottom:12px;box-shadow:0 8px 24px -8px oklch(0.3 0.05 30 / .45)}
+  .qty button{width:40px;height:40px}
+}
