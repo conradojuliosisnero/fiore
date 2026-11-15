@@ -1,0 +1,224 @@
+---
+import Base from '../layouts/Base.astro';
+import { getProducts, PHONES, INSTAGRAM, WHATSAPP, fmt } from '../data/store.js';
+const products = await getProducts();
+const occasions = ['Todas', ...new Set(products.flatMap((p) => p.occasions))];
+const steps = [
+  { n: '01', t: 'Elige tu diseño', d: 'Mira el catálogo y agrega lo que te guste al pedido.' },
+  { n: '02', t: 'Lo hacemos a mano', d: 'Moldeamos cada flor pieza por pieza.' },
+  { n: '03', t: 'Te dura para siempre', d: 'No necesita agua ni cuidados.' },
+];
+---
+<Base>
+  <div class="topbar">Flores hechas a mano que no se marchitan · Cartagena</div>
+
+  <header class="header">
+    <div class="wrap">
+      <a href="/" class="logo" aria-label="Fiore, inicio">Fiore</a>
+      <nav class="nav" aria-label="Principal">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#como">Cómo funciona</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <button class="pill" data-open-cart aria-label="Abrir pedido">
+        <span>Pedido</span><span class="badge" data-cart-count>0</span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div class="hero-copy">
+        <div class="kicker">Hechas a mano · Cartagena</div>
+        <h1>Flores que duran <em>para siempre.</em></h1>
+        <p>Donde cada flor cuenta una historia única y cada arreglo es una obra de arte, hecho a mano pétalo por pétalo.</p>
+        <div class="hero-actions">
+          <a href="#catalogo" class="btn btn-primary"><span>Ver colecciones</span><span aria-hidden="true">→</span></a>
+          <a href={`https://wa.me/${WHATSAPP}`} class="btn" target="_blank" rel="noopener">Escríbenos por WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-media ph">
+        <picture>
+          <source srcset="/images/home-photo.avif" type="image/avif" />
+          <img src="/images/home-photo.webp" alt="Arreglo de flores artesanales Fiore" fetchpriority="high" />
+        </picture>
+      </div>
+    </section>
+
+    <section id="catalogo" class="wrap catalog">
+      <div class="catalog-head">
+        <h2 class="serif">Nuestras colecciones</h2>
+        <div class="count" data-count aria-live="polite">{products.length} diseños hechos a mano</div>
+      </div>
+      {occasions.length > 1 && (
+        <div class="chips" role="group" aria-label="Filtrar por ocasión">
+          {occasions.map((o, i) => <button class="chip" data-occ={o} aria-pressed={i === 0 ? 'true' : 'false'}>{o}</button>)}
+        </div>
+      )}
+      <div class="grid">
+        {products.map((p, i) => (
+          <article class="card" data-id={p.id} data-occ={p.occasions.join('|')} style={`animation-delay:${Math.min(i, 12) * 60}ms`}>
+            <button class="card-media" data-open={p.id} aria-label={`Ver ${p.name}`}>
+              <div class="layer ph">
+                {p.image && <img src={p.image} alt={p.name} loading={i < 4 ? 'eager' : 'lazy'} decoding="async" />}
+              </div>
+            </button>
+            <div class="card-info">
+              <div><div class="card-name">{p.name}</div>{p.description && <div class="card-desc">{p.description}</div>}</div>
+              <div class="card-price">{fmt(p.price)}</div>
+            </div>
+            <button class="add" data-add={p.id}>Agregar al pedido</button>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="como" class="how">
+      <div class="wrap">
+        <h2 class="serif">Así de simple</h2>
+        {steps.map((s) => (
+          <div class="step"><div class="step-n">{s.n}</div><div class="step-t">{s.t}</div><div class="step-d">{s.d}</div></div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <footer id="contacto" class="footer">
+    <div class="wrap">
+      <div class="logo" style="font-size:26px">Fiore</div>
+      <div class="footer-links">
+        {PHONES.map((ph) => <a href={`https://wa.me/57${ph.replace(/\s/g, '')}`} target="_blank" rel="noopener">WhatsApp {ph}</a>)}
+        <a href={`https://instagram.com/${INSTAGRAM}`} target="_blank" rel="noopener">@{INSTAGRAM}</a>
+        <span>Cartagena, Bolívar</span>
+        <span>© {new Date().getFullYear()} Fiore</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="backdrop modal-wrap" data-modal hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-name">
+      <div class="modal-media ph" data-m-media></div>
+      <div class="modal-body">
+        <div class="modal-head">
+          <h3 class="serif" id="m-name" data-m-name></h3>
+          <button class="icon-btn" data-close-modal aria-label="Cerrar">✕</button>
+        </div>
+        <div class="card-price" style="font-size:20px" data-m-price></div>
+        <div class="card-desc" style="font-size:14px;line-height:1.5" data-m-desc></div>
+        <ul class="details" data-m-details></ul>
+        <div class="chips" data-m-occ></div>
+        <div style="display:flex;align-items:center;gap:16px">
+          <span class="label">Cantidad</span>
+          <div class="qty" style="margin:0"><button data-m-dec aria-label="Menos">−</button><span data-m-qty>1</span><button data-m-inc aria-label="Más">+</button></div>
+        </div>
+        <button class="btn btn-primary btn-block" data-m-add><span>Agregar al pedido</span><span aria-hidden="true">→</span></button>
+        <a class="btn btn-block" data-m-wa target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="backdrop drawer-wrap" data-cart hidden>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-label="Tu pedido">
+      <div class="drawer-head">
+        <div class="serif" style="font-size:30px">Tu pedido</div>
+        <button class="icon-btn" data-close-cart aria-label="Cerrar">✕</button>
+      </div>
+      <div class="drawer-items" data-cart-items></div>
+      <div class="drawer-foot">
+        <div class="total"><span>Total</span><span data-cart-total>$0</span></div>
+        <button class="btn btn-primary btn-block" data-checkout><span>Enviar pedido por WhatsApp</span><span aria-hidden="true">→</span></button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="toast" data-toast hidden role="status"><span data-toast-text></span><button data-open-cart>Ver pedido</button></div>
+
+  <script is:inline type="application/json" id="products-data" set:html={JSON.stringify(products)}></script>
+
+  <script>
+    import { WHATSAPP, fmt } from '../data/store.js';
+    const PRODUCTS = JSON.parse(document.getElementById('products-data').textContent);
+    const $ = (s, r = document) => r.querySelector(s);
+    const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const KEY = 'fiore-cart-v2';
+    let cart = JSON.parse(localStorage.getItem(KEY) || '[]').filter((c) => PRODUCTS.some((p) => p.id == c.id));
+    let sel = null, qty = 1, toastT;
+    const byId = (id) => PRODUCTS.find((p) => p.id == id);
+    const lineTotal = (c) => (byId(c.id).price ?? 0) * c.qty;
+    const hasUnpriced = () => cart.some((c) => byId(c.id).price == null);
+
+    function save() { localStorage.setItem(KEY, JSON.stringify(cart)); render(); }
+    function render() {
+      const n = cart.reduce((a, c) => a + c.qty, 0);
+      const badge = $('[data-cart-count]');
+      if (+badge.textContent < n) badge.animate([{ transform: 'scale(1)' }, { transform: 'scale(1.45)' }, { transform: 'scale(.9)' }, { transform: 'scale(1)' }], { duration: 500, easing: 'cubic-bezier(.2,.8,.2,1)' });
+      badge.textContent = n;
+      const sum = cart.reduce((a, c) => a + lineTotal(c), 0);
+      $('[data-cart-total]').textContent = hasUnpriced() ? (sum ? fmt(sum) + ' + por confirmar' : 'Por confirmar') : fmt(sum);
+      $('[data-checkout]').disabled = !cart.length;
+      $('[data-cart-items]').innerHTML = cart.length ? cart.map((c, i) => {
+        const p = byId(c.id);
+        return `<div class="line"><div class="line-thumb ph">${p.image ? `<img src="${esc(p.image)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:12px">` : ''}</div>
+          <div class="line-body"><div class="card-name" style="font-size:15px">${esc(p.name)}</div>
+          <div class="qty"><button data-q="${i}" data-d="-1" aria-label="Quitar uno">−</button><span>${c.qty}</span><button data-q="${i}" data-d="1" aria-label="Agregar uno">+</button></div></div>
+          <div style="font-weight:600;font-size:14px">${fmt(p.price == null ? null : lineTotal(c))}</div></div>`;
+      }).join('') : '<div class="empty">Aún no has agregado nada.</div>';
+    }
+    function add(id, n = 1) {
+      const ex = cart.find((c) => c.id == id);
+      ex ? (ex.qty += n) : cart.push({ id, qty: n });
+      save();
+      const btn = $(`[data-add="${id}"]`);
+      if (btn) { btn.classList.add('is-added'); btn.textContent = '✓ Agregado'; setTimeout(() => { btn.classList.remove('is-added'); btn.textContent = 'Agregar al pedido'; }, 1400); }
+      $('[data-toast-text]').textContent = `${byId(id).name} agregado`;
+      $('[data-toast]').hidden = false; clearTimeout(toastT);
+      toastT = setTimeout(() => ($('[data-toast]').hidden = true), 2600);
+    }
+    function open(el) { el.hidden = false; el.classList.remove('closing'); document.body.style.overflow = 'hidden'; }
+    function close(el) { el.classList.add('closing'); setTimeout(() => { el.hidden = true; el.classList.remove('closing'); document.body.style.overflow = ''; }, 220); }
+    function setQty(n) { qty = Math.max(1, n); $('[data-m-qty]').textContent = qty; updateWa(); }
+    function updateWa() {
+      const msg = `Hola, estoy interesado en el producto ${sel.name} que vi en su página web.\nCantidad: ${qty}\n¿Cómo puedo proceder con la compra?`;
+      $('[data-m-wa]').href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+    }
+    function openProduct(id) {
+      sel = byId(id);
+      $('[data-m-name]').textContent = sel.name;
+      $('[data-m-price]').textContent = fmt(sel.price);
+      $('[data-m-desc]').textContent = sel.description;
+      $('[data-m-media]').innerHTML = sel.image ? `<img src="${esc(sel.image)}" alt="${esc(sel.name)}" style="width:100%;height:100%;object-fit:cover">` : '';
+      $('[data-m-details]').innerHTML = sel.details.map((d) => `<li>${esc(d)}</li>`).join('');
+      $('[data-m-occ]').innerHTML = sel.occasions.map((o) => `<span class="chip" style="cursor:default">${esc(o)}</span>`).join('');
+      $('[data-toast]').hidden = true; setQty(1); open($('[data-modal]'));
+    }
+
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('button,[data-modal],[data-cart]');
+      if (!t) return;
+      if ((t.matches('[data-modal]') || t.matches('[data-cart]')) && e.target === t) return close(t);
+      if (t.dataset.occ) {
+        const o = t.dataset.occ; let n = 0;
+        $$('.chip[data-occ]').forEach((c) => c.setAttribute('aria-pressed', String(c === t)));
+        $$('.card').forEach((c) => { const show = o === 'Todas' || c.dataset.occ.split('|').includes(o); c.hidden = !show; if (show) { n++; c.style.animation = 'none'; c.offsetHeight; c.style.animation = ''; } });
+        $('[data-count]').textContent = `${n} diseños hechos a mano`;
+      }
+      if (t.dataset.open) openProduct(t.dataset.open);
+      if (t.dataset.add) add(byId(t.dataset.add).id);
+      if (t.hasAttribute('data-m-dec')) setQty(qty - 1);
+      if (t.hasAttribute('data-m-inc')) setQty(qty + 1);
+      if (t.hasAttribute('data-m-add')) { add(sel.id, qty); close($('[data-modal]')); }
+      if (t.hasAttribute('data-close-modal')) close($('[data-modal]'));
+      if (t.hasAttribute('data-open-cart')) { $('[data-toast]').hidden = true; open($('[data-cart]')); }
+      if (t.hasAttribute('data-close-cart')) close($('[data-cart]'));
+      if (t.dataset.q !== undefined) { cart[+t.dataset.q].qty += +t.dataset.d; cart = cart.filter((x) => x.qty > 0); save(); }
+      if (t.hasAttribute('data-checkout') && cart.length) {
+        const lines = cart.map((c) => `• ${c.qty} x ${byId(c.id).name} — ${fmt(byId(c.id).price == null ? null : lineTotal(c))}`);
+        const txt = `Hola Fiore, quiero hacer este pedido:\n${lines.join('\n')}\nTotal: ${$('[data-cart-total]').textContent}`;
+        window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(txt)}`, '_blank');
+      }
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') $$('.backdrop:not([hidden])').forEach(close); });
+    render();
+  </script>
+</Base>

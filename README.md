@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Fiore · Astro
 
-## Getting Started
+Tienda de flores hechas a mano. Sitio estático en Astro: el catálogo se genera como HTML (indexable por Google) y la interactividad (filtros, ficha, carrito, pedido por WhatsApp) es JavaScript ligero sin framework.
 
-First, run the development server:
-
-```bash
+## Desarrollo
+```
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Productos
+Se leen en el build desde la misma API de antes (`GET_PRODUCTS`, ya configurada en Netlify). Si falla, se usa el catálogo local con las fotos de `public/images` (sin precio → "Consultar"). Para ver cambios de la API hay que redeployar (o configurar un build hook).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+**Mantén la carpeta `public/images` del repo actual** — el sitio usa esas fotos y `home-photo.avif/webp`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Subir al repo (reemplaza la versión Next.js)
+```
+git checkout -b astro-redesign
+# borra los archivos de Next (app/, pages/, next.config.*, etc.) y copia el contenido de esta carpeta en la raíz
+git add -A && git commit -m "Rediseño en Astro"
+git push -u origin astro-redesign
+```
+Abre un PR y, al hacer merge a `main`, Netlify despliega con `netlify.toml` (build `npm run build`, publish `dist`). Si Netlify tenía el plugin de Next.js configurado en la UI, quítalo en Site settings → Build & deploy.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Las rutas viejas `/shoping`, `/search` y `/contact` redirigen con 301.

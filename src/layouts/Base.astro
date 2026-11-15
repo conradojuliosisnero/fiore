@@ -1,0 +1,48 @@
+---
+import '../styles/global.css';
+import { PHONES, INSTAGRAM } from '../data/store.js';
+const { title = 'Fiore · Flores hechas a mano en Cartagena', description = 'Ramos y arreglos de flores hechas a mano que no se marchitan. Personaliza tu regalo y pide por WhatsApp en Cartagena.' } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site);
+const image = new URL('/images/home-photo.webp', Astro.site);
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'Florist',
+  name: 'Fiore',
+  url: Astro.site,
+  image,
+  description,
+  telephone: PHONES.map((p) => '+57 ' + p),
+  address: { '@type': 'PostalAddress', addressLocality: 'Cartagena', addressRegion: 'Bolívar', addressCountry: 'CO' },
+  sameAs: [`https://instagram.com/${INSTAGRAM}`],
+};
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_CO" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fiore" />
+    <meta property="og:url" content={url} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="1330" />
+    <meta property="og:image:alt" content="Arreglo de flores artesanales Fiore" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href={url} />
+    <link rel="icon" type="image/png" href="/images/FIORE-LOGO.png" />
+    <link rel="apple-touch-icon" href="/images/FIORE-LOGO.png" />
+    <script type="application/ld+json" set:html={JSON.stringify(business)} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

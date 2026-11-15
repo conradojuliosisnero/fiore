@@ -1,0 +1,32 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Rutas antiguas de la versión Next.js
+[[redirects]]
+  from = "/shoping"
+  to = "/#catalogo"
+  status = 301
+
+[[redirects]]
+  from = "/search"
+  to = "/#catalogo"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/#contacto"
+  status = 301
+
+[[redirects]]
+  from = "/cart"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/shoping/product/*"
+  to = "/#catalogo"
+  status = 301
